@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Outlet, Link, NavLink } from "react-router-dom";
+/* icons */
+import InstallsIcon from "../assets/icons/InstallsIcon.svg";
+import ProjectsIcon from "../assets/icons/ProjectsIcon.svg";
+import CommunityIcon from "../assets/icons/CommunityIcon.svg";
 
 const SidebarNavbar = () => {
+  const liClass = "bg-transparent rounded-lg my-1 p-2 flex items-center hover:font-semibold"
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -14,56 +19,32 @@ const SidebarNavbar = () => {
         {/* Sidebar */}
         <aside class="w-64 bg-gray-800 p-4 text-white">
           {/* Sidebar Content Goes Here */}
-          <div class="mb-4">
-            <h2 class="text-xl font-semibold">Sidebar Title</h2>
-          </div>
           <ul>
-            <li class="mb-2">
-              <a href="#" class="hover:text-gray-300">
-                Link 1
-              </a>
+            <li class={liClass}>
+              <img src={ProjectsIcon} alt="" class="w-4 h-4 mr-4" />
+              <p>Projetos</p>
             </li>
-            <li class="mb-2">
-              <a href="#" class="hover:text-gray-300">
-                Link 2
-              </a>
+            <li class={liClass}>
+              <img src={InstallsIcon} alt="" class="w-4 h-4 mr-4" />
+              <p class="">Versões</p>
             </li>
-            <li class="mb-2">
-              <a href="#" class="hover:text-gray-300">
-                Link 3
-              </a>
+            <li class={liClass}>
+              <img src={CommunityIcon} alt="" class="w-4 h-4 mr-4" />
+              <p>Comunidade</p>
             </li>
-            {/* Add more links as needed */}
+            {/* <li class={liClass}>
+              <p>Sobre</p>
+            </li> */}
           </ul>
         </aside>
 
         {/* Main Content */}
         <div class="flex-1 flex flex-col overflow-hidden">
           {/* Page Content Goes Here */}
-          <header class="bg-white shadow">
-            <div class="p-4">
-              <h1 class="text-xl font-semibold">Page Title</h1>
-            </div>
-          </header>
-          <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4">
-            {/* Page Content Goes Here  */}
-            <p>Your main content goes here.</p>
-            <Outlet />
-          </main>
+          <Outlet />
         </div>
       </div>
     </>
-    // <div className={`sidebar-navbar ${isOpen ? 'open' : ''}`}>
-    //     <div className="sidebar-toggle" onClick={toggleSidebar}>
-    //         <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'}`}></i>
-    //     </div>
-    //     <ul className="nav-items">
-    //         <li className="nav-item">Home</li>
-    //         <li className="nav-item">About</li>
-    //         <li className="nav-item">Services</li>
-    //         <li className="nav-item">Contact</li>
-    //     </ul>
-    // </div>
   );
 };
 
