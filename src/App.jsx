@@ -1,13 +1,17 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout.jsx";
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/electron-vite.animate.svg'
+import ProjectPage from "./routes/ProjectPage.jsx"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    children: [],
+    children: [
+      {
+        path: "/projects",
+        element: <ProjectPage />
+      }
+    ],
   },
 ]);
 
