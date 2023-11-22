@@ -8,7 +8,7 @@ import ProfilePictureIcon from "../assets/icons/ProfilePictureIcon.svg";
 
 const sidebarItems = [
 	{ icon: ProjectsIcon, text: "Projetos", route: "/projects" },
-	{ icon: InstallsIcon, text: "Versões", route: "/installs" },
+	{ icon: InstallsIcon, text: "Versões", route: "/versions" },
 	{ icon: CommunityIcon, text: "Comunidade", route: "/community" },
 ];
 
