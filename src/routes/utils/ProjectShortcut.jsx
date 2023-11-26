@@ -7,7 +7,7 @@ export default function ProjectShortcut({
   projectPath,
 }) {
   return (
-    <div class="p-1">
+    <div className="p-1">
       {/* {header} */}
       <div className="flex items-center justify-start w-full h-18 rounded-lg bg-gray-700 px-4">
         <img
