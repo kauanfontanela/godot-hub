@@ -5,13 +5,14 @@ export default function ProjectShortcut({
   projectTitle,
   projectVersion,
   projectPath,
+  projectIcon,
 }) {
   return (
-    <div className="p-1">
+    <div class="p-1">
       {/* {header} */}
       <div className="flex items-center justify-start w-full h-18 rounded-lg bg-gray-700 px-4">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Godot_icon.svg"
+          src={projectIcon}
           alt="Icon"
           className="w-16 h-16 mr-2 rounded-full"
         />
