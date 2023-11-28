@@ -10,11 +10,11 @@ export default function ProjectShortcut({
   return (
     <div class="p-1">
       {/* {header} */}
-      <div className="flex items-center justify-start w-full h-18 rounded-lg bg-gray-700 px-4">
+      <div className="flex items-center justify-start w-full h-18 rounded-lg bg-gray-700 px-4 py-2">
         <img
           src={projectIcon}
           alt="Icon"
-          className="w-16 h-16 mr-2 rounded-full"
+          className="w-16 h-16 mr-2"
         />
         <div className="flex flex-col">
           <div className="justify-between">

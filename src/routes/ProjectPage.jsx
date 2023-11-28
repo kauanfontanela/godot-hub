@@ -1,15 +1,13 @@
 import ProjectShortcut from './utils/ProjectShortcut';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { loadRegisteredProjects } from '../data/ProjectManager';
+
 
 function ProjectPage() {
-  const projects = [
-    { title: 'B', version: '5.0.0', path: '/projeto-1', icon: '' },
-    { title: 'Arojeto 2', version: '2.1.0', path: '/projeto-2', icon: '' },
-    { title: 'Crojeto 3', version: '3.5.2', path: '/projeto-3', icon: '' },
-  ];
-
+  const projects = loadRegisteredProjects();
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('Nome');
+  const inputProjectFileRef = useRef(null);
 
   const filteredProjects = projects.filter((project) =>
     project.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -35,13 +33,25 @@ function ProjectPage() {
     setSortBy(e.target.value);
   };
 
+  const openProjectDialogRequested = () => {
+    inputProjectFileRef.current.click();
+  }
+
+  const handleOpenProject = (e) => {
+    const filePath = e.target.files[0].path;
+    // TODO register project
+    console.log(filePath);
+  }
+
   const sortedProjects = sortProjects(sortBy);
+
 
   return (
     <div className="bg-gray-400 min-h-screen">
       <div className="text-3xl p-4 flex justify-between">
         <p>Projetos</p>
-        <button className="bg-gray-700 text-gray-300 text-sm px-4 py-2 rounded"> Adicionar Projeto </button>
+        <button className="bg-gray-700 text-gray-300 text-sm px-4 py-2 rounded" onClick={openProjectDialogRequested}> Adicionar Projeto </button>
+        <input type="file" style={{ display: 'none' }} ref={inputProjectFileRef} accept='.godot' onChange={handleOpenProject} />
       </div>
       <div className="ml-5 mr-5 rounded-lg flex justify-between items-center">
         <div className="search-header flex-grow">
