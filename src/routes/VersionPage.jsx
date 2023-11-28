@@ -4,22 +4,22 @@ import React, { useState } from 'react';
 function VersionPage() {
   const versions = [
     {
-      title: 'B',
-      version: '5.0.0',
+      title: 'Godot V4.2',
+      release: '5.0.0',
       path: '/projeto-1',
       icon: '',
       available: true,
     },
     {
-      title: 'Arojeto 2',
-      version: '2.1.0',
+      title: 'Godot V4.1',
+      release: '2.1.0',
       path: '/projeto-2',
       icon: '',
       available: false,
     },
     {
-      title: 'Crojeto 3',
-      version: '3.5.2',
+      title: 'Godot V3.5',
+      release: '3.5.2',
       path: '/projeto-3',
       icon: '',
       available: true,
@@ -87,7 +87,7 @@ function VersionPage() {
           <VersionShortcut
             key={index}
             versionTitle={project.title}
-            versionRelease={project.version}
+            versionRelease={project.release}
             versionPath={project.path}
             versionAvailable={project.available}
           />

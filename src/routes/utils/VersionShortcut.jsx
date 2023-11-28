@@ -20,7 +20,7 @@ export default function versionShortcut({
           </div>
           <div className="flex items-center">
             {/* <Folder className="w-3 h-3 mr-2 text-white" /> */}
-            <p className="text-sm"> bostamijocu de novembro</p>
+            <p className="text-sm"> {versionRelease} </p>
           </div>
         </div>
         <div className="flex flex-row">
@@ -29,7 +29,7 @@ export default function versionShortcut({
               Abrir
             </button>
           ) : (
-            <button className="mr-1 bg-gray-200 text-black text-sm px-5 py-2 rounded transition-all hover:bg-gray-400 hover:text-white hover:shadow-lg">
+            <button className="mr-1 bg-blue-700 text-white text-sm px-5 py-2 rounded transition-all hover:bg-blue-800 hover:text-white hover:shadow-lg">
               Download
             </button>
           )}
