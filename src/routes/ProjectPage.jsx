@@ -1,6 +1,7 @@
 import ProjectShortcut from './utils/ProjectShortcut';
 import React, { useState, useRef } from 'react';
-import { loadRegisteredProjects } from '../data/ProjectManager';
+import { loadRegisteredProjects, registerProject } from '../data/ProjectManager';
+
 
 
 function ProjectPage() {
@@ -39,8 +40,9 @@ function ProjectPage() {
 
   const handleOpenProject = (e) => {
     const filePath = e.target.files[0].path;
-    // TODO register project
-    console.log(filePath);
+    registerProject(filePath);
+    // REVIEW reload ou useState
+    window.location.reload();
   }
 
   const sortedProjects = sortProjects(sortBy);

@@ -26,14 +26,14 @@ export const loadProject = function (projectPath) {
 
     let title = application['config/name']
 
-    let path = Path.dirname(projectPath) + "/"
+    let path = Path.dirname(projectPath)
 
     let features = application['config/features'];
     let match = features.match(/PackedStringArray\("([^"]*)"/);
     let version = match ? match[1] : "N/A";
 
     let resIconPath = application['config/icon'];
-    let icon = "file://" + path + resIconPath.replace("res://", "");
+    let icon = "file://" + path + "/" + resIconPath.replace("res://", "");
     console.log(icon);
 
     return { title, version, icon, path }
@@ -48,6 +48,18 @@ export const loadRegisteredProjects = function () {
 
 export const registerProject = function (path) {
     var projectList = getProjectList();
+
+    if (projectList.includes(path))
+        return;
+
     projectList.push(path);
     setProjectList(projectList);
+}
+
+export const removeRegisteredProject = function (path) {
+    var removedProjectList = getProjectList().filter(projectPath => {
+        return Path.dirname(projectPath) != path
+    });
+
+    setProjectList(removedProjectList);
 }
