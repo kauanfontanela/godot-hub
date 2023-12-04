@@ -1,0 +1,78 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useUser } from './utils/ReactContext';
+
+const LoginPage = () => {
+  const { user, setUser } = useUser();
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+    rememberMe: false,
+  });
+
+  const handleInputChange = (event) => {
+    const { id, value, type, checked } = event.target;
+    const newData = type === 'checkbox' ? checked : value;
+    setLoginData({ ...loginData, [id]: newData });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
+    setUser({ ...user, id: loginData.email }); 
+  };
+
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <form className="bg-gray-800 shadow-md rounded px-10 pt-6 pb-8 mb-4 w-3/5" onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="email">
+            ID ou Email
+          </label>
+          <input
+            className="bg-gray-900 shadow appearance-none border border-black rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            type="email"
+            placeholder="Login"
+            value={loginData.email}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="mb-6">
+          <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="password">
+            Senha
+          </label>
+          <input
+            className="bg-gray-900 shadow appearance-none border border-black rounded w-full py-2 px-3 text-gray-100 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="password"
+            type="password"
+            placeholder="Senha"
+            value={loginData.password}
+            onChange={handleInputChange}
+          />
+          <div className="flex items-center">
+            <input
+              className="mr-2 leading-tight"
+              id="rememberMe"
+              type="checkbox"
+              checked={loginData.rememberMe}
+              onChange={handleInputChange}
+            />
+            <label className="text-gray-300 text-sm" htmlFor="rememberMe">
+              Lembrar-me
+            </label>
+          </div>
+        </div>
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            <Link to="/home">Entrar</Link>
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default LoginPage;
