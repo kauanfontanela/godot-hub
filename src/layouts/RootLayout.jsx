@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useLocation } from "react-router-dom";
 import InstallsIcon from "../assets/icons/InstallsIcon.svg";
 import ProjectsIcon from "../assets/icons/ProjectsIcon.svg";
 import CommunityIcon from "../assets/icons/CommunityIcon.svg";
@@ -15,9 +15,9 @@ const sidebarItems = [
 ];
 
 const SidebarNavbar = () => {
-  const { user } = useUser(); // Obtendo o contexto do usuário
+  const { user } = useUser(); 
+  const location = useLocation();
 
-  // Se o usuário existir e tiver uma propriedade 'id', usamos seu 'id' como nome do usuário
   const userName = user && user.id ? user.id : "Anônimo";
 
   return (
@@ -37,7 +37,7 @@ const SidebarNavbar = () => {
           <ul>
             {sidebarItems.map((item, index) => (
               <li className="bg-transparent rounded-lg flex items-center" key={index}>
-                <NavLink to={item.route} className="flex items-center focus:outline-none hover:font-semibold opacity-70 hover:opacity-100 w-full h-full blur-[0.7px] hover:blur-none transition-all ps-1 py-3">
+                <NavLink to={item.route} className={`flex items-center focus:outline-none w-full h-full ps-1 py-3 ${location.pathname === item.route ? 'font-semibold opacity-100 blur-none' : 'opacity-70 blur-[0.7px] hover:opacity-100 hover:blur-none transition-all'}`}>
                   <img src={item.icon} alt="" className="mr-4" width="22px" />
                   <p>{item.text}</p>
                 </NavLink>
