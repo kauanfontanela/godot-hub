@@ -1,17 +1,19 @@
 import {Link} from 'react-router-dom'
+import React from 'react';
 
-export default function ProjectPage() {
+const iframeStyles = {
+    width: '100%',
+    height: '100vh', // 100% da altura da janela
+    border: 'none', // Para remover a borda padrão do iframe
+};
+
+export default function CommunityPage() {
     return (
-        <div class="p-8">
-            {/* {header} */}
-            <div className="p-6">
-                <h2 className="mb-5 text-3xl font-semibold text-white-700">Community #</h2>
-                <Link to="/produtos" className="text-sm text-teal-600 hover:text-red-700">
-                Voltar
-                </Link>
-            </div>
-
+        <div style={{ width: '100%', height: '100vh' }}>
+          <iframe src="https://godotengine.org/community/" style={iframeStyles}>
+            Seu navegador não suporta iFrames.
+          </iframe>
         </div>
-    
-    )
+    );
 }
+
