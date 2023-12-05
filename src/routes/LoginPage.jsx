@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link , useHistory } from 'react-router-dom';
+import { Link  } from 'react-router-dom';
 import { useUser } from './utils/ReactContext';
 
 const LoginPage = () => {
@@ -20,13 +20,13 @@ const LoginPage = () => {
     event.preventDefault(); 
     if (loginData.email.trim() !== '' && loginData.password.trim() !== '') {
       setUser({ ...user, id: loginData.email });
-      history.push('/home');
+   //   history.push('/home');
     } else {
       alert("Por favor, preencha os campos de login e senha!");
     }
   };
 
-  const history = useHistory(); // Hook useHistory para acessar o objeto history
+  //const history = useHistory(); // Hook useHistory para acessar o objeto history
 
   return (
     <div className="flex justify-center items-center h-screen">
