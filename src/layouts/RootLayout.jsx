@@ -1,6 +1,7 @@
 import { useLocation } from "react-router"
 import { NavLink, Outlet } from "react-router-dom"
 import { User, Box, DownloadCloud, Compass } from "feather-icons-react"
+import { useUser } from "../routes/utils/ReactContext";
 
 const pages = [
   { title: "Projetos", route: "/projects", icon: Box },
@@ -12,6 +13,8 @@ const pages = [
 const SidebarNavbar = function () {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login"
+  const { user } = useUser(); 
+  const username = user && user.id ? user.id : "Anônimo";
 
   return (
     <div className="flex" style={{ height: "100svh" }}>
@@ -20,7 +23,7 @@ const SidebarNavbar = function () {
         <NavLink to="/login" className="group" >
           <div className="flex items-center rounded-full p-1 mb-7 mt-3">
             <User className={`w-[42px] h-[42px] p-1 rounded-full bg-gray-600 group-hover:drop-shadow-[0px_1px_6px_rgba(255,255,255,.35)] group-hover:border-[1px] transition-all ${isLoginPage ? "drop-shadow-[0px_1px_6px_rgba(255,255,255,.35)] border-[1px]" : ""}`}></User>
-            <span className="text-lg m-3 group-hover:drop-shadow-[0px_4px_12px_rgba(255,255,255,.44)] transition-all">Lorem Ipsum</span>
+            <span className="text-lg m-3 group-hover:drop-shadow-[0px_4px_12px_rgba(255,255,255,.44)] transition-all">{username}</span>
           </div>
         </NavLink>
 
