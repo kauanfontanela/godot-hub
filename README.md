@@ -12,31 +12,45 @@ O Godot Hub é desenvolvido com as seguintes tecnologias, bibliotecas e framewor
 - [Tailwind CSS](https://tailwindcss.com/): Um framework CSS altamente personalizável e baseado em classes.
 - [React](https://react.dev/): Uma biblioteca JavaScript popular para criar interfaces de usuário interativas.
 
-## Estrutura
+## Conceito da Estrutura
 Combinando o já existente gerenciador de projetos inicial da Godot Engine ao popular UnityHub, o projeto toma o seguinte layout:
 
-> Exemplos
+- Principal referência *(unity hub)*
+![Alt text](img/project-page-ref.jpeg)
+![Alt text](img/version-page-ref.jpeg)
+
+- Ideia inicial
 ![Design principal](imgs/image.png)
 ![Exemplo de página](imgs/image-1.png)
 
+## Execução
 ### Pág1. Projetos
-Lista dos projetos instalados, capaz de abrir e criar novos projetos
+- Lista editável dos projetos localizados no aplicativo, mostrando sua versão e diretório
+![Alt text](img/project-page-default.jpeg)
+
+- Oferece funções para filtrar e ordenar os projetos afim de facilitar a busca:
+![Alt text](img/project-page-search.jpeg)
+![Alt text](img/project-page-sort-version.jpeg)
+
+- Ao clicar no projeto, oferece uma lista com todas versões compatíveis instaladas para abrir o projeto
+![Alt text](img/project-page-open.jpeg)
 
 ### Pág2. Versões
-Lista de versões instaladas na máquina, capaz de listar baixar novas versões diretamente do site oficial
+- Lista de versões disponíveis online e localmente,
+![Alt text](img/version-page.jpeg)
+Os botões de `Release` e `Changelog` redirecionam para as páginas oficiais do Godot. Versões baixadas oferecem a opção `Abrir` e versões disponíveis para download oferecem a opção `Baixar`
+
+- Há uma barra de pesquisa para filtrar versões de maneira rápida
+![Alt text](img/version-page-seach.jpeg)
 
 ### Pág3. Comunidade
 Âncoras e/ou *iframe* com documentação e o [blog oficial](https://godotengine.org/blog/) da Godot Engine
 
-### Pág4. Saiba mais
-Créditos e informações dos desenvolvedores
-
 ### Outras Páginas
 - Login para identificação de usuário e geração de perfis de uso.
-- Configuração para alocação de arquivos de instalação e preferências do usuário
+![Alt text](img/login.jpeg)
 
 ## Equipe de Desenvolvimento
 - Kauan Biring Fontanela
 - Lucas Adriano dos Anjos
 - Tainara da Rosa
-- Luis Henrique Parker
