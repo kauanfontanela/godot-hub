@@ -32,7 +32,7 @@ const SidebarNavbar = () => {
               : "from-gray-700"
 
             return (<NavLink to={page.route}>
-              <li key={idx} className={`my-1 px-1 bg-gradient-to-r rounded-full hover:ms-2 hover:from-gray-950 transition-all ${classNameApdx}`}>
+              <li key={idx} className={`my-1 px-1 bg-gradient-to-r rounded-s-full hover:ms-2 hover:from-gray-950 transition-all ${classNameApdx}`}>
                 <div className="flex py-2">
                   <page.icon className="w-[22px] mx-3"></page.icon>
                   <p>{page.title}</p>
