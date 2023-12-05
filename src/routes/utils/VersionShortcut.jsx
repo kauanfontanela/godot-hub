@@ -8,6 +8,7 @@ export default function versionShortcut({
   versionChangelogURL,
   versionNewsURL,
   versionAvailable,
+  handleDownload,
 }) {
   return (
     <div class="p-1">
@@ -26,7 +27,7 @@ export default function versionShortcut({
               Abrir
             </button>
           ) : (
-            <button className="mr-1 bg-blue-700 text-white text-sm px-5 py-2 rounded transition-all hover:bg-blue-800 hover:text-white hover:shadow-lg">
+            <button className="mr-1 bg-blue-700 text-white text-sm px-5 py-2 rounded transition-all hover:bg-blue-800 hover:text-white hover:shadow-lg" onClick={handleDownload}>
               Download
             </button>
           )}

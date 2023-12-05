@@ -1,3 +1,8 @@
+import AdmZip from "adm-zip";
+import { homedir } from "os";
+
+const fs = require('fs');
+const { exec } = require("child_process");
 const { load } = require('cheerio');
 
 const baseURL = "https://godotengine.org";
@@ -33,4 +38,15 @@ const getVersionData = async function (versionURL) {
     const download = downloads.find(a => a.attribs.href.includes('win')).attribs.href;
 
     return { changelog, news, download }
+}
+
+export const downloadVersion = function (versionURL) {
+    fs.existsSync(homedir() + "/Godot") || fs.mkdirSync(homedir() + "/Godot");
+
+    const name = versionURL.split('/').pop()
+
+    exec(`curl -OL ${versionURL} --output-dir ${homedir()}/Godot`, (error, stdout, stderr) => {
+        const zip = AdmZip(homedir() + "/Godot/" + name);
+        zip.extractAllTo(homedir() + "/Godot/", true);
+    });
 }

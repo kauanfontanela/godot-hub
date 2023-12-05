@@ -1,4 +1,4 @@
-import { listOnlineVersions } from '../data/VersionManager';
+import { listOnlineVersions, downloadVersion } from '../data/VersionManager';
 import VersionShortcut from './utils/VersionShortcut';
 import React, { useState } from 'react';
 
@@ -63,14 +63,18 @@ function VersionPage() {
       </div>
       <div className="ProjectList m-2 p-2 bg-gray-900 rounded h-full overflow-y-auto">
         {sortedversions.map((project, index) => (
-          <VersionShortcut
-            key={index}
-            versionTitle={project.title}
-            versionDownloadURL={project.download}
-            versionChangelogURL={project.changelog}
-            versionNewsURL={project.news}
-            versionAvailable={project.available}
-          />
+          <>
+            <VersionShortcut
+              key={index}
+              versionTitle={project.title}
+              versionDownloadURL={project.download}
+              versionChangelogURL={project.changelog}
+              versionNewsURL={project.news}
+              versionAvailable={project.available}
+              handleDownload={() => downloadVersion(project.download)}
+            />
+            <p>{project.download}</p>
+          </>
         ))}
       </div>
     </div>
