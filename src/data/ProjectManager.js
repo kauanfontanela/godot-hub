@@ -3,6 +3,7 @@ import { homedir } from 'os'
 const fs = require('fs')
 const ini = require('ini')
 const Path = require('path')
+const { exec } = require("child_process");
 
 const listPath = homedir() + '/.godothub';
 
@@ -62,4 +63,19 @@ export const removeRegisteredProject = function (path) {
     });
 
     setProjectList(removedProjectList);
+}
+
+export const openProject = function (path, version) {
+    const versionsDir = homedir() + "/Godot/"
+
+    const availableVersions = fs.readdirSync(versionsDir).filter(file => file.includes(`v${version}`) && !file.endsWith(".zip"))
+
+    return availableVersions.map(foundVersion => ({
+        title: foundVersion,
+        handler: function () {
+            exec(`"${versionsDir + foundVersion}" --path "${path}" -e`, (error, stdout, stderr) => {
+                console.log(error)
+            });
+        }
+    }))
 }

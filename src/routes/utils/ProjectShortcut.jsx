@@ -1,49 +1,65 @@
-import { Link } from 'react-router-dom';
-import { Folder } from 'feather-icons-react';
-import { removeRegisteredProject } from '../../data/ProjectManager';
+import { useState } from 'react';
+import { X } from 'feather-icons-react';
+import { openProject } from '../../data/ProjectManager';
 
-function handleRemoveProject(path) {
-  removeRegisteredProject(path);
-  // REVIEW reload ou useState
-  window.location.reload();
-}
+const truncateStyle = {
+  overflow: 'hidden',
+  display: '-webkit-box',
+  WebkitLineClamp: 1,
+  WebkitBoxOrient: 'vertical',
+};
 
 export default function ProjectShortcut({
   projectTitle,
   projectVersion,
   projectPath,
   projectIcon,
+  removeProjectHandler,
 }) {
-  return (
-    <div class="p-1">
-      {/* {header} */}
-      <div className="flex items-center justify-start w-full h-18 rounded-lg bg-gray-700 px-4 py-2">
-        <img
-          src={projectIcon}
-          alt="Icon"
-          className="w-16 h-16 mr-2"
-        />
-        <div className="flex flex-col w-full">
-          <div className="flex">
-            <div className="flex text-xl font-semibold text-white-700">
+  const compatibleVersions = openProject(projectPath, projectVersion);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const removeProject = function () {
+    removeProjectHandler(projectPath);
+  }
+
+  return (<>
+    <li className="flex items-center w-full h-18 p-2 bg-gray-800">
+      <button className="flex group w-full" onClick={() => setIsModalOpen(true)}>
+        <img src={projectIcon} alt="icon" className="w-16 h-16" />
+        <div className="flex-col px-3 text-gray-300">
+          <div className="flex font-semibold">
+            <div className="text-xl group-hover:underline " style={truncateStyle}>
               {projectTitle}
             </div>
-            <div className="text-xs text-gray-400 ml-2 py-2">
-              {projectVersion}
-            </div>
-            <button className="text-sm text-gray-400 font-bold ms-auto px-4 -me-2 pb-2 rounded" onClick={() => handleRemoveProject(projectPath)}>x</button>
+            <span className="text-sm h-min ms-4 mt-0.5 p-1 px-3 bg-gray-700 rounded-xl">{projectVersion}</span>
           </div>
-          <div className="flex items-center">
-            <Folder className="w-3 h-3 mr-2 text-white" />
-            <Link
-              to="/produtos"
-              className="text-sm text-gray-400 hover:text-red-700"
-            >
-              {projectPath}
-            </Link>
-          </div>
+          <span className="text-left text-gray-400" style={truncateStyle}>
+            {projectPath}
+          </span>
+        </div>
+      </button>
+      <button className="flex mb-10 p-1 hover:bg-red-700 rounded-full transition-all group" onClick={removeProject}>
+        <X className="text-gray-300 ms-auto " />
+      </button>
+    </li>
+
+    {isModalOpen && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center ms-64">
+        <div className="bg-gradient-to-t to-gray-900 from-gray-800 border-[1px] border-gray-900 drop-shadow-xl p-5 px-8 rounded-lg transition-all">
+          <ul>
+            {compatibleVersions.map(version => (
+              <li className="text-lg text-gray-200 hover:drop-shadow-[0px_1px_6px_rgba(255,255,255,.44)]">
+                <button className='w-full' onClick={version.handler}>{version.title}</button>
+              </li>
+            ))}
+          </ul>
+          <button className='text-sm text-white bg-gray-700 rounded-lg p-1 w-full mt-2' onClick={() => setIsModalOpen(false)}>
+            CANCEL
+          </button>
         </div>
       </div>
-    </div>
-  );
+    )}
+  </>)
 }

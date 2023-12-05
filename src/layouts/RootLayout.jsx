@@ -1,54 +1,52 @@
-import React from "react";
-import { Outlet, NavLink } from "react-router-dom";
-import InstallsIcon from "../assets/icons/InstallsIcon.svg";
-import ProjectsIcon from "../assets/icons/ProjectsIcon.svg";
-import CommunityIcon from "../assets/icons/CommunityIcon.svg";
-import ConfigIcon from "../assets/icons/ConfigIcon.svg";
-import ProfilePictureIcon from "../assets/icons/ProfilePictureIcon.svg";
+import { useLocation } from "react-router"
+import { NavLink, Outlet } from "react-router-dom"
+import { User, Box, DownloadCloud, Compass } from "feather-icons-react"
 
-const sidebarItems = [
-	{ icon: ProjectsIcon, text: "Projetos", route: "/projects" },
-	{ icon: InstallsIcon, text: "Versões", route: "/versions" },
-	{ icon: CommunityIcon, text: "Comunidade", route: "/community" },
-];
+const pages = [
+  { title: "Projetos", route: "/projects", icon: Box },
+  { title: "Versões", route: "/versions", icon: DownloadCloud },
+  { title: "Comunidade", route: "/community", icon: Compass }
 
-const SidebarNavbar = () => {
-	return (
-		<>
-			<div class="flex h-screen bg-gray-200">
-				<aside className="w-64 bg-gray-800 p-4 text-white">
-					<div className="flex mt-5">
-						<button to="/projects" className="me-auto hover:drop-shadow-[0px_4px_12px_rgba(255,255,255,.35)] transition-all">
-							<img src={ProfilePictureIcon} className="" alt="" width="42px" />
-						</button>
+]
 
-						<button to="/" className="ms-auto opacity-70 hover:opacity-100 hover:drop-shadow-[0px_4px_12px_rgba(255,255,255,.35)] transition-all">
-							<img src={ConfigIcon} alt="" width="26px" />
-						</button>
-					</div>
+const SidebarNavbar = function () {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login"
 
-					<hr className="border-gray-700 border-1 mt-7 mb-5" />
+  return (
+    <div className="flex" style={{ height: "100svh" }}>
+      <aside className="w-64 bg-gray-800 p-2 text-white drop-shadow-lg">
+        {/* Login block */}
+        <NavLink to="/login" className="group" >
+          <div className="flex items-center rounded-full p-1 mb-7 mt-3">
+            <User className={`w-[42px] h-[42px] p-1 rounded-full bg-gray-600 group-hover:drop-shadow-[0px_1px_6px_rgba(255,255,255,.35)] group-hover:border-[1px] transition-all ${isLoginPage ? "drop-shadow-[0px_1px_6px_rgba(255,255,255,.35)] border-[1px]" : ""}`}></User>
+            <span className="text-lg m-3 group-hover:drop-shadow-[0px_4px_12px_rgba(255,255,255,.44)] transition-all">Lorem Ipsum</span>
+          </div>
+        </NavLink>
 
-					<ul>
-						{sidebarItems.map((item, index) => (
-							<li className="bg-transparent rounded-lg flex items-center" key={index}>
-								<NavLink to={item.route} className="flex items-centerfocus:outline-none hover:font-semibold opacity-70 hover:opacity-100 w-full h-full blur-[0.7px] hover:blur-none transition-all ps-1 py-3">
-									<img src={item.icon} alt="" className="mr-4" width="22px" />
-									<p>{item.text}</p>
-								</NavLink>
-							</li>
-						))}
-					</ul>
-				</aside >
+        {/* Pages navlinks */}
+        <ul>
+          {pages.map((page, idx) => {
+            const classNameApdx = location.pathname === page.route
+              ? "from-gray-900"
+              : "from-gray-700"
 
-				{/* Main Content */}
-				< div class="flex-1 flex flex-col overflow-hidden bg-gray-700" >
-					{/* Page Content Goes Here */}
-					< Outlet />
-				</div >
-			</div >
-		</>
-	);
-};
+            return (<NavLink to={page.route}>
+              <li key={idx} className={`my-1 px-1 bg-gradient-to-r rounded-s-full hover:ms-2 hover:from-gray-950 transition-all ${classNameApdx}`}>
+                <div className="flex py-2">
+                  <page.icon className="w-[22px] mx-3"></page.icon>
+                  <p>{page.title}</p>
+                </div>
+              </li>
+            </NavLink>)
+          })}
+        </ul>
+      </aside>
+      <div className="flex flex-1 flex-col">
+        <Outlet />
+      </div>
+    </div>
+  )
+}
 
 export default SidebarNavbar;
