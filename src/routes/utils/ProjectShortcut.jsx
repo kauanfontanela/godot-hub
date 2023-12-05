@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Folder } from 'feather-icons-react';
-import { removeRegisteredProject } from '../../data/ProjectManager';
 
 
 const truncateStyle = {
@@ -10,17 +9,13 @@ const truncateStyle = {
   WebkitBoxOrient: 'vertical',
 };
 
-function handleRemoveProject(path) {
-  removeRegisteredProject(path);
-  // REVIEW reload ou useState
-  window.location.reload();
-}
 
 export default function ProjectShortcut({
   projectTitle,
   projectVersion,
   projectPath,
   projectIcon,
+  handleRemoveProject,
 }) {
   return (
     <div class="p-1">
@@ -33,10 +28,10 @@ export default function ProjectShortcut({
         />
         <div className="flex flex-col w-full">
           <div className="flex">
-            <div  className="flex text-xl font-semibold text-gray-300" style={truncateStyle}>
+            <div className="flex text-xl font-semibold text-gray-300" style={truncateStyle}>
               {projectTitle}
             </div>
-            <div  className="text-xs text-gray-400 ml-2 py-2">
+            <div className="text-xs text-gray-400 ml-2 py-2">
               {projectVersion}
             </div>
             <button className="text-sm text-gray-400 font-bold ms-auto px-4 -me-2 pb-2 rounded" onClick={() => handleRemoveProject(projectPath)}>x</button>

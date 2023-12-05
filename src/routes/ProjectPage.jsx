@@ -1,11 +1,10 @@
 import ProjectShortcut from './utils/ProjectShortcut';
 import React, { useState, useRef } from 'react';
-import { loadRegisteredProjects, registerProject } from '../data/ProjectManager';
-
+import { loadRegisteredProjects, registerProject, removeRegisteredProject } from '../data/ProjectManager';
 
 
 function ProjectPage() {
-  const projects = loadRegisteredProjects();
+  const [projects, setProjects] = useState(loadRegisteredProjects());
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('Nome');
   const inputProjectFileRef = useRef(null);
@@ -41,8 +40,12 @@ function ProjectPage() {
   const handleOpenProject = (e) => {
     const filePath = e.target.files[0].path;
     registerProject(filePath);
-    // REVIEW reload ou useState
-    window.location.reload();
+    setProjects(loadRegisteredProjects());
+  }
+
+  function handleRemoveProject(path) {
+    removeRegisteredProject(path);
+    setProjects(loadRegisteredProjects());
   }
 
   const sortedProjects = sortProjects(sortBy);
@@ -66,7 +69,7 @@ function ProjectPage() {
           />
         </div>
         <div className="filter-section ml-4">
-          <label className ="text-gray-300 mr-2" htmlFor="sort-by">Ordenar por: </label>
+          <label className="text-gray-300 mr-2" htmlFor="sort-by">Ordenar por: </label>
           <select id="sort-by" value={sortBy} onChange={handleSortChange} className='rounded border border-black bg-gray-800 px-3 py-2 text-gray-300 focus:outline-none focus:border-gray-900'>
             <option value="Nome">Nome</option>
             <option value="Versão">Versão</option>
@@ -81,6 +84,7 @@ function ProjectPage() {
             projectVersion={project.version}
             projectPath={project.path}
             projectIcon={project.icon}
+            handleRemoveProject={handleRemoveProject}
           />
         ))}
       </div>
