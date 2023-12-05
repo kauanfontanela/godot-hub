@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useUser } from './utils/ReactContext';
 
 const LoginPage = () => {
@@ -17,10 +17,10 @@ const LoginPage = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     if (loginData.email.trim() !== '' && loginData.password.trim() !== '') {
       setUser({ ...user, id: loginData.email });
-   //   history.push('/home');
+      //   history.push('/home');
     } else {
       alert("Por favor, preencha os campos de login e senha!");
     }
@@ -29,8 +29,8 @@ const LoginPage = () => {
   //const history = useHistory(); // Hook useHistory para acessar o objeto history
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <form className="bg-gray-800 shadow-md rounded px-10 pt-6 pb-8 mb-4 w-3/5" onSubmit={handleSubmit}>
+    <div className="flex justify-center items-center h-screen bg-gray-800">
+      <form className="bg-gradient-to-b to-gray-900 from-gray-800 drop-shadow-lg border-[1px] border-gray-900 rounded px-10 pt-6 pb-8 mb-4 w-3/5" onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="email">
             ID ou Email
@@ -74,9 +74,9 @@ const LoginPage = () => {
             disabled={loginData.email.trim() === '' || loginData.password.trim() === ''}
             onClick={handleSubmit}
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-[#478cbf] text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            <Link  to="/home">Entrar</Link>
+            <Link to="/home">Entrar</Link>
           </button>
         </div>
       </form>

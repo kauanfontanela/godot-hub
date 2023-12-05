@@ -40,7 +40,7 @@ export default function ProjectShortcut({
 
     {isModalOpen && (
       <div className="fixed inset-0 z-50 flex items-center justify-center ms-64">
-        <div className="bg-gradient-to-t to-gray-900 from-gray-800 drop-shadow-xl p-5 px-8 rounded-lg transition-all">
+        <div className="bg-gradient-to-t to-gray-900 from-gray-800 border-[1px] border-gray-900 drop-shadow-xl p-5 px-8 rounded-lg transition-all">
           <ul>
             {compatibleVersions.map(version => (
               <li className="text-lg text-gray-200 hover:drop-shadow-[0px_1px_6px_rgba(255,255,255,.44)]">
