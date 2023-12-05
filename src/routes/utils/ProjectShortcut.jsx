@@ -2,6 +2,13 @@ import { useState } from 'react';
 import { X } from 'feather-icons-react';
 import { openProject } from '../../data/ProjectManager';
 
+const truncateStyle = {
+  overflow: 'hidden',
+  display: '-webkit-box',
+  WebkitLineClamp: 1,
+  WebkitBoxOrient: 'vertical',
+};
+
 export default function ProjectShortcut({
   projectTitle,
   projectVersion,
@@ -23,12 +30,12 @@ export default function ProjectShortcut({
         <img src={projectIcon} alt="icon" className="w-16 h-16" />
         <div className="flex-col px-3 text-gray-300">
           <div className="flex font-semibold">
-            <div className="text-xl group-hover:underline">
+            <div className="text-xl group-hover:underline " style={truncateStyle}>
               {projectTitle}
             </div>
             <span className="text-sm h-min ms-4 mt-0.5 p-1 px-3 bg-gray-700 rounded-xl">{projectVersion}</span>
           </div>
-          <span className="text-gray-400">
+          <span className="text-left text-gray-400" style={truncateStyle}>
             {projectPath}
           </span>
         </div>
