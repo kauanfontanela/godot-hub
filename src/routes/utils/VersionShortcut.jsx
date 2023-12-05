@@ -11,16 +11,16 @@ export default function versionShortcut({
   return (
     <div class="p-1">
       {/* {header} */}
-      <div className="flex items-center justify-start w-full h-20 rounded-lg bg-gray-700 px-4">
+      <div className="flex items-center justify-start w-full h-20 rounded-lg bg-gray-800 px-4">
         <div className="flex flex-col w-full">
           <div className="flex justify-between items-center">
-            <h2 className="text-xl font-semibold text-white-700">
+            <h2 className="text-xl font-semibold text-gray-300">
               {versionTitle}
             </h2>
           </div>
           <div className="flex items-center">
             {/* <Folder className="w-3 h-3 mr-2 text-white" /> */}
-            <p className="text-sm"> {versionRelease} </p>
+            <p className="text-sm text-gray-400"> {versionRelease} </p>
           </div>
         </div>
         <div className="flex flex-row">

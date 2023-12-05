@@ -49,16 +49,16 @@ function ProjectPage() {
 
 
   return (
-    <div className="bg-gray-400 min-h-screen">
-      <div className="text-3xl p-4 flex justify-between">
+    <div className="bg-gray-700 min-h-screen">
+      <div className="text-3xl p-4 flex justify-between text-gray-300">
         <p>Projetos</p>
-        <button className="bg-gray-700 text-gray-300 text-sm px-4 py-2 rounded" onClick={openProjectDialogRequested}> Adicionar Projeto </button>
+        <button className="bg-gray-800 text-gray-300 text-sm px-4 py-2 rounded transition-all hover:bg-blue-900 hover:shadow-lg" onClick={openProjectDialogRequested}> Adicionar Projeto </button>
         <input type="file" style={{ display: 'none' }} ref={inputProjectFileRef} accept='.godot' onChange={handleOpenProject} />
       </div>
-      <div className="ml-5 mr-5 rounded-lg flex justify-between items-center">
+      <div className="ml-2 mr-5 rounded-lg flex justify-between items-center">
         <div className="search-header flex-grow">
           <input
-            className="bg-gray-700 p-2 rounded-lg text-gray-300 w-full"
+            className="bg-gray-800 p-2 rounded-lg text-gray-300 w-full"
             type="text"
             placeholder="Pesquisar projeto..."
             value={searchTerm}
@@ -66,14 +66,14 @@ function ProjectPage() {
           />
         </div>
         <div className="filter-section ml-4">
-          <label htmlFor="sort-by">Ordenar por:</label>
-          <select id="sort-by" value={sortBy} onChange={handleSortChange}>
+          <label className ="text-gray-300 mr-2" htmlFor="sort-by">Ordenar por: </label>
+          <select id="sort-by" value={sortBy} onChange={handleSortChange} className='rounded border border-black bg-gray-800 px-3 py-2 text-gray-300 focus:outline-none focus:border-gray-900'>
             <option value="Nome">Nome</option>
             <option value="Versão">Versão</option>
           </select>
         </div>
       </div>
-      <div className="ProjectList p-4">
+      <div className="ProjectList m-2 p-2 bg-gray-900 rounded">
         {sortedProjects.map((project, index) => (
           <ProjectShortcut
             key={index}

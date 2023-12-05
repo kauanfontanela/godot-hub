@@ -3,7 +3,6 @@ import { Outlet, NavLink, useLocation } from "react-router-dom";
 import InstallsIcon from "../assets/icons/InstallsIcon.svg";
 import ProjectsIcon from "../assets/icons/ProjectsIcon.svg";
 import CommunityIcon from "../assets/icons/CommunityIcon.svg";
-import ConfigIcon from "../assets/icons/ConfigIcon.svg";
 import ProfilePictureIcon from "../assets/icons/ProfilePictureIcon.svg";
 import { Link } from 'react-router-dom';
 import { useUser } from "../routes/utils/ReactContext";
@@ -25,13 +24,10 @@ const SidebarNavbar = () => {
       <div className="flex h-screen bg-gray-200">
         <aside className="w-64 bg-gray-800 p-4 text-white">
           <div className="flex items-center mt-5">
-            <Link to="/login" className="me-2 hover:drop-shadow-[0px_4px_12px_rgba(255,255,255,.35)] transition-all">
+            <Link to="/login" className={`me-2 hover:drop-shadow-[0px_4px_12px_rgba(255,255,255,.35)] ${location.pathname === '/login' ? 'font-semibold opacity-100 blur-none drop-shadow-[0px_4px_12px_rgba(255,255,255,.35)]' : 'opacity-70 blur-[0.7px] hover:opacity-100 hover:blur-none transition-all'} transition-all`}>
               <img src={ProfilePictureIcon} alt="" width="42px" />
             </Link>
             <span className="text-sm">{userName}</span>
-            <button to="/" className="ml-auto opacity-70 hover:opacity-100 hover:drop-shadow-[0px_4px_12px_rgba(255,255,255,.35)] transition-all">
-              <img src={ConfigIcon} alt="" width="26px" />
-            </button>
           </div>
           <hr className="border-gray-700 border-1 mt-7 mb-5" />
           <ul>

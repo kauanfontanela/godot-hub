@@ -2,6 +2,14 @@ import { Link } from 'react-router-dom';
 import { Folder } from 'feather-icons-react';
 import { removeRegisteredProject } from '../../data/ProjectManager';
 
+
+const truncateStyle = {
+  overflow: 'hidden',
+  display: '-webkit-box',
+  WebkitLineClamp: 1,
+  WebkitBoxOrient: 'vertical',
+};
+
 function handleRemoveProject(path) {
   removeRegisteredProject(path);
   // REVIEW reload ou useState
@@ -17,7 +25,7 @@ export default function ProjectShortcut({
   return (
     <div class="p-1">
       {/* {header} */}
-      <div className="flex items-center justify-start w-full h-18 rounded-lg bg-gray-700 px-4 py-2">
+      <div className="flex items-center justify-start w-full h-18 rounded-lg bg-gray-800 px-4 py-2">
         <img
           src={projectIcon}
           alt="Icon"
@@ -25,17 +33,17 @@ export default function ProjectShortcut({
         />
         <div className="flex flex-col w-full">
           <div className="flex">
-            <div className="flex text-xl font-semibold text-white-700">
+            <div  className="flex text-xl font-semibold text-gray-300" style={truncateStyle}>
               {projectTitle}
             </div>
-            <div className="text-xs text-gray-400 ml-2 py-2">
+            <div  className="text-xs text-gray-400 ml-2 py-2">
               {projectVersion}
             </div>
             <button className="text-sm text-gray-400 font-bold ms-auto px-4 -me-2 pb-2 rounded" onClick={() => handleRemoveProject(projectPath)}>x</button>
           </div>
           <div className="flex items-center">
             <Folder className="w-3 h-3 mr-2 text-white" />
-            <Link
+            <Link style={truncateStyle}
               to="/produtos"
               className="text-sm text-gray-400 hover:text-red-700"
             >
