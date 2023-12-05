@@ -61,7 +61,7 @@ function VersionPage() {
           </select>
         </div>
       </div>
-      <div className="ProjectList m-2 p-2 bg-gray-900 rounded">
+      <div className="ProjectList m-2 p-2 bg-gray-900 rounded h-full overflow-y-auto">
         {sortedversions.map((project, index) => (
           <VersionShortcut
             key={index}

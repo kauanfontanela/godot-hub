@@ -76,7 +76,7 @@ function ProjectPage() {
           </select>
         </div>
       </div>
-      <div className="ProjectList m-2 p-2 bg-gray-900 rounded">
+      <div className="ProjectList m-2 p-2 bg-gray-900 rounded h-full overflow-y-auto">
         {sortedProjects.map((project, index) => (
           <ProjectShortcut
             key={index}
