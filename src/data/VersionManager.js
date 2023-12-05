@@ -20,7 +20,11 @@ export const listOnlineVersions = async function () {
 
         const data = await getVersionData(url)
 
-        versionList.push({ title, url, available: false, ...data })
+        const fileName = data.download.split('/').pop().replace(".zip", "")
+        const path = homedir() + "/Godot/" + fileName
+        const available = fs.existsSync(path)
+
+        versionList.push({ title, url, path, available, ...data })
     }
 
     return versionList;
@@ -40,7 +44,7 @@ const getVersionData = async function (versionURL) {
     return { changelog, news, download }
 }
 
-export const downloadVersion = function (versionURL) {
+export const downloadVersion = function (versionURL, callback) {
     fs.existsSync(homedir() + "/Godot") || fs.mkdirSync(homedir() + "/Godot");
 
     const name = versionURL.split('/').pop()
@@ -48,5 +52,12 @@ export const downloadVersion = function (versionURL) {
     exec(`curl -OL ${versionURL} --output-dir ${homedir()}/Godot`, (error, stdout, stderr) => {
         const zip = AdmZip(homedir() + "/Godot/" + name);
         zip.extractAllTo(homedir() + "/Godot/", true);
+        callback(error)
+    });
+}
+
+export const openVersion = function (path) {
+    exec(`"${path}"`, (error, stdout, stderr) => {
+        console.log(error)
     });
 }

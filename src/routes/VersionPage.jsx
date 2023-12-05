@@ -71,9 +71,8 @@ function VersionPage() {
               versionChangelogURL={project.changelog}
               versionNewsURL={project.news}
               versionAvailable={project.available}
-              handleDownload={() => downloadVersion(project.download)}
+              versionPath={project.path}
             />
-            <p>{project.download}</p>
           </>
         ))}
       </div>
