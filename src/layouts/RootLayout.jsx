@@ -1,53 +1,52 @@
-import React from "react";
-import { Outlet, NavLink, useLocation } from "react-router-dom";
-import InstallsIcon from "../assets/icons/InstallsIcon.svg";
-import ProjectsIcon from "../assets/icons/ProjectsIcon.svg";
-import CommunityIcon from "../assets/icons/CommunityIcon.svg";
-import ProfilePictureIcon from "../assets/icons/ProfilePictureIcon.svg";
-import { Link } from 'react-router-dom';
-import { useUser } from "../routes/utils/ReactContext";
+import { useLocation } from "react-router"
+import { NavLink, Outlet } from "react-router-dom"
+import { User, Box, DownloadCloud, Compass } from "feather-icons-react"
 
-const sidebarItems = [
-  { icon: ProjectsIcon, text: "Projetos", route: "/projects" },
-  { icon: InstallsIcon, text: "Versões", route: "/versions" },
-  { icon: CommunityIcon, text: "Comunidade", route: "/community" },
-];
+const pages = [
+  { title: "Projetos", route: "/projects", icon: Box },
+  { title: "Versões", route: "/versions", icon: DownloadCloud },
+  { title: "Comunidade", route: "/community", icon: Compass }
+
+]
 
 const SidebarNavbar = () => {
-  const { user } = useUser(); 
   const location = useLocation();
-
-  const userName = user && user.id ? user.id : "Anônimo";
+  const isLoginPage = location.pathname === "/login"
 
   return (
-    <>
-      <div className="flex h-screen bg-gray-200">
-        <aside className="w-64 bg-gray-800 p-4 text-white">
-          <div className="flex items-center mt-5">
-            <Link to="/login" className={`me-2 hover:drop-shadow-[0px_4px_12px_rgba(255,255,255,.35)] ${location.pathname === '/login' ? 'font-semibold opacity-100 blur-none drop-shadow-[0px_4px_12px_rgba(255,255,255,.35)]' : 'opacity-70 blur-[0.7px] hover:opacity-100 hover:blur-none transition-all'} transition-all`}>
-              <img src={ProfilePictureIcon} alt="" width="42px" />
-            </Link>
-            <span className="text-sm">{userName}</span>
+    <div className="flex" style={{ height: "100svh" }}>
+      <aside className="w-64 bg-gray-800 p-2 text-white ">
+        {/* Login block */}
+        <NavLink to="/login" className="group" >
+          <div className="flex items-center rounded-full p-1 mb-4 mt-3">
+            <User className={`w-[42px] h-[42px] p-1 rounded-full bg-gray-600 group-hover:drop-shadow-[0px_1px_6px_rgba(255,255,255,.35)] group-hover:border-[1px] transition-all ${isLoginPage ? "drop-shadow-[0px_1px_6px_rgba(255,255,255,.35)] border-[1px]" : ""}`}></User>
+            <span className="text-lg m-3 group-hover:drop-shadow-[0px_4px_12px_rgba(255,255,255,.44)] transition-all">Lorem Ipsum</span>
           </div>
-          <hr className="border-gray-700 border-1 mt-7 mb-5" />
-          <ul>
-            {sidebarItems.map((item, index) => (
-              <li className="bg-transparent rounded-lg flex items-center" key={index}>
-                <NavLink to={item.route} className={`flex items-center focus:outline-none w-full h-full ps-1 py-3 ${location.pathname === item.route ? 'font-semibold opacity-100 blur-none' : 'opacity-70 blur-[0.7px] hover:opacity-100 hover:blur-none transition-all'}`}>
-                  <img src={item.icon} alt="" className="mr-4" width="22px" />
-                  <p>{item.text}</p>
-                </NavLink>
+        </NavLink>
+
+        {/* Pages navlinks */}
+        <ul>
+          {pages.map((page, idx) => {
+            const classNameApdx = location.pathname === page.route
+              ? "from-gray-900"
+              : "from-gray-700"
+
+            return (<NavLink to={page.route}>
+              <li key={idx} className={`my-1 px-1 bg-gradient-to-r rounded-full hover:ms-2 hover:from-gray-950 transition-all ${classNameApdx}`}>
+                <div className="flex py-2">
+                  <page.icon className="w-[22px] mx-3"></page.icon>
+                  <p>{page.title}</p>
+                </div>
               </li>
-            ))}
-          </ul>
-        </aside>
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col overflow-hidden bg-gray-700">
-          <Outlet />
-        </div>
+            </NavLink>)
+          })}
+        </ul>
+      </aside>
+      <div className="flex flex-1 flex-col">
+        <Outlet />
       </div>
-    </>
-  );
-};
+    </div>
+  )
+}
 
 export default SidebarNavbar;
