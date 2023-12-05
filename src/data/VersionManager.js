@@ -34,7 +34,6 @@ const getVersionData = async function (versionURL) {
     var res = await (await fetch(baseURL + versionURL)).text();
     let $ = load(res);
 
-    // get <a> element of class btn_changelog and log it's href
     const changelog = $('.btn-release-changelog').attr('href');
     const news = baseURL + $('.btn-release-notes').attr('href');
 
@@ -61,3 +60,10 @@ export const openVersion = function (path) {
         console.log(error)
     });
 }
+
+export const remapVersionList = function (versionList) {
+    return versionList.map(version => {
+        version.available = fs.existsSync(version.path)
+        return version
+    })
+};
