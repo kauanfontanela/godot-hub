@@ -1,31 +1,10 @@
+import { listOnlineVersions } from '../data/VersionManager';
 import VersionShortcut from './utils/VersionShortcut';
 import React, { useState } from 'react';
 
-function VersionPage() {
-  const versions = [
-    {
-      title: 'Godot V4.2',
-      release: '5.0.0',
-      path: '/projeto-1',
-      icon: '',
-      available: true,
-    },
-    {
-      title: 'Godot V4.1',
-      release: '2.1.0',
-      path: '/projeto-2',
-      icon: '',
-      available: false,
-    },
-    {
-      title: 'Godot V3.5',
-      release: '3.5.2',
-      path: '/projeto-3',
-      icon: '',
-      available: true,
-    },
-  ];
+const versions = await listOnlineVersions();
 
+function VersionPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('Nome');
 
@@ -76,7 +55,7 @@ function VersionPage() {
         </div>
         <div className="filter-section ml-4">
           <label htmlFor="sort-by">Ordenar por: </label>
-          <select  id="sort-by" value={sortBy} onChange={handleSortChange} className='rounded border border-black bg-gray-800 px-3 py-2 text-gray-300 focus:outline-none focus:border-gray-900'>
+          <select id="sort-by" value={sortBy} onChange={handleSortChange} className='rounded border border-black bg-gray-800 px-3 py-2 text-gray-300 focus:outline-none focus:border-gray-900'>
             <option value='Nome'>Nome</option>
             <option value='Versão'>Versão</option>
           </select>
@@ -87,8 +66,9 @@ function VersionPage() {
           <VersionShortcut
             key={index}
             versionTitle={project.title}
-            versionRelease={project.release}
-            versionPath={project.path}
+            versionDownloadURL={project.download}
+            versionChangelogURL={project.changelog}
+            versionNewsURL={project.news}
             versionAvailable={project.available}
           />
         ))}

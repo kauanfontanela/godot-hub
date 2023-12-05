@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
-// import { Folder } from 'feather-icons-react';
+
+const shell = require('electron').shell
 
 export default function versionShortcut({
   versionTitle,
-  versionRelease,
-  versionPath,
-  versionType,
+  versionDownloadURL,
+  versionChangelogURL,
+  versionNewsURL,
   versionAvailable,
 }) {
   return (
@@ -18,10 +19,6 @@ export default function versionShortcut({
               {versionTitle}
             </h2>
           </div>
-          <div className="flex items-center">
-            {/* <Folder className="w-3 h-3 mr-2 text-white" /> */}
-            <p className="text-sm text-gray-400"> {versionRelease} </p>
-          </div>
         </div>
         <div className="flex flex-row">
           {versionAvailable ? (
@@ -33,14 +30,14 @@ export default function versionShortcut({
               Download
             </button>
           )}
-          <button className="mr-1 bg-gray-200 text-black text-sm px-5 py-2 rounded transition-all hover:bg-gray-400 hover:text-white hover:shadow-lg">
+          <button className="mr-1 bg-gray-200 text-black text-sm px-5 py-2 rounded transition-all hover:bg-gray-400 hover:text-white hover:shadow-lg" onClick={() => shell.openExternal(versionNewsURL)} >
             News
           </button>
-          <button className="bg-gray-200 text-black text-sm px-5 py-2 rounded transition-all hover:bg-gray-400 hover:text-white hover:shadow-lg">
+          <button className="bg-gray-200 text-black text-sm px-5 py-2 rounded transition-all hover:bg-gray-400 hover:text-white hover:shadow-lg" onClick={() => shell.openExternal(versionChangelogURL)}>
             Changelog
           </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
