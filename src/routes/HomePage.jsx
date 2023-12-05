@@ -8,7 +8,7 @@ const HomePage = () => {
   const { user } = useUser(); 
   const username = user && user.id ? user.id : "Anônimo";
   return (
-    <div className="mt-8 mx-4 text-gray-200">
+    <div className="pt-8 px-4 text-gray-200 bg-gray-800" style={{height: "100svh"}}>
       <h1 className="text-3xl font-semibold mb-4">Bem vindo, {username}!</h1>
       <p className="text-lg mb-8">
         Continue de onde parou ou acesse outros projetos no menu Projetos.
