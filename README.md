@@ -1,4 +1,4 @@
-# Godot Hub - Gerenciador de Projetos e Versões para a Game Engine Godot
+# Godot Hub - Gerenciador de Projetos e Versões para a Game Engine Godot  ${- \color{#9a6700}\textit{ Projeto Universitário}}$
 
 O Godot Hub é uma ferramenta projetada para simplificar o gerenciamento de projetos na renomada Game Engine [Godot](https://godotengine.org). Inspirado no conceito do bem-sucedido Unity Hub, nosso objetivo é facilitar o processo de versionamento de múltiplos projetos em diferentes versões da Engine, garantindo que você possa manter seus produtos de forma eficiente e eficaz.
 
